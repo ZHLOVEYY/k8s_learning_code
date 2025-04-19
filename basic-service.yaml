@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: k8slearn #端口名字
+spec:
+  type: LoadBalancer #负载均衡,直接暴露给外部访问
+  selector:
+    app: k8slearn
+  ports:
+    - protocol: TCP
+      port: 82  #外部访问端口 可以自己改
+      targetPort: 8080  #转发到pod上的哪个端口

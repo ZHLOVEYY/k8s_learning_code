@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment  # 声明这是一个 Deployment 资源，用于管理 Pod 的生命周期
+metadata:  #定义deployment的名称，后续操作都基于这个
+  name: k8slearn
+spec: 
+  replicas: 3 # 副本数
+  selector:  # pod 选择器 按照label来挑选资源
+    matchLabels:
+      app: k8slearn
+  template: #描述的是你的 POD 是什么样的
+    metadata:
+      labels:
+        app: k8slearn #与上述 selector 匹配！
+    spec:
+      containers:
+      - name: k8slearn  #用于日志查看、调试等操作，kubectl logs pod-name -c k8slearn
+        image: k8slearn:v0.0.1  # 对应makefile中自己创建的镜像
+        ports:
+        - containerPort: 8080  # 对应自己启动的8080端口
